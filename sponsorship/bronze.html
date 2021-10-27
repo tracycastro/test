@@ -1,0 +1,95 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>RTS Forms</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/main.css">
+  x
+
+  <meta name="theme-color" content="#fafafa">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Add your site or application content here -->
+  <div class = "content">
+    <div class="intro">
+      <h1>2021-2022 Sponsorships</h1>
+      <p>For details about sponsorships including information about benefits with each level, visit the <a href="https://mactheatre.com/giving">MacTheatre Giving Page</a>.</p>
+    </div><!--/.intro-->
+    <div class="button-content">
+      <div id="smart-button-container">
+        <div style="text-align: center;">
+          <div id="paypal-button-container"></div>
+        </div>
+      </div>
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+    <script>
+      function initPayPalButton() {
+        paypal.Buttons({
+          style: {
+            shape: 'pill',
+            color: 'black',
+            layout: 'vertical',
+            label: 'donate',
+
+          },
+
+          createOrder: function(data, actions) {
+            return actions.order.create({
+              purchase_units: [{"description":"Bronze Sponsorship","amount":{"currency_code":"USD","value":1,"breakdown":{"item_total":{"currency_code":"USD","value":1}}},"items":[{"name":"item name","unit_amount":{"currency_code":"USD","value":1},"quantity":"1","category":"DONATION"}]}]
+            });
+          },
+
+          onApprove: function(data, actions) {
+            return actions.order.capture().then(function(orderData) {
+
+              // Full available details
+              console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+              // Show a success message within this page, e.g.
+              const element = document.getElementById('paypal-button-container');
+              element.innerHTML = '';
+              element.innerHTML = '<h3>Thank you for your payment!</h3>';
+
+              // Or go to another URL:  actions.redirect('thank_you.html');
+
+            });
+          },
+
+          onError: function(err) {
+            console.log(err);
+          }
+        }).render('#paypal-button-container');
+      }
+      initPayPalButton();
+    </script>
+        <p class="smaller">Gold and above link to the correct ludus page. Does Ludus have a way to go to a google sheet? We could have it go to one sheet or tab, and the bronze and silver go to another? Would that work?</p>
+    </div>
+    <a class="smaller" href="/">&larr; Back to Main Page</a>
+  </div><!--/.content-->
+
+  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+
+
+</body>
+
+</html>
